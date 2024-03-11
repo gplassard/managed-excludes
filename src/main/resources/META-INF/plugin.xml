@@ -8,11 +8,20 @@
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.gplassard.managedexcludes.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-    </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.gplassard.managedexcludes.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <actions>
+        <action
+                id="com.github.gplassard.managedexcludes.actions.AddManagedExcludesAction"
+                class="com.github.gplassard.managedexcludes.actions.AddManagedExcludesAction"
+                text="Add managed excludes"
+                description="Adds the managed excludes">
+            <add-to-group group-id="ToolsMenu"/>
+        </action>
+        <action
+                id="com.github.gplassard.managedexcludes.actions.CancelManagedExcludesAction"
+                class="com.github.gplassard.managedexcludes.actions.CancelManagedExcludesAction"
+                text="Cancel managed excludes"
+                description="Cancels the managed excludes">
+            <add-to-group group-id="ToolsMenu"/>
+        </action>
+    </actions>
 </idea-plugin>
