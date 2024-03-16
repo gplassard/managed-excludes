@@ -7,6 +7,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformCoreDataKeys
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class CancelManagedExcludesAction: AnAction() {
@@ -27,9 +29,12 @@ class CancelManagedExcludesAction: AnAction() {
             thisLogger().warn("No config service, aborting")
             return
         }
-        val excludes = configService.loadExcludeConfig(module)
-        thisLogger().warn("Going to cancel exclude ${excludes.size} files")
-        excludeService.cancelExcludePaths(module, excludes)
-        thisLogger().info("END")
+        // FIXME
+        GlobalScope.launch {
+            val excludes = configService.loadExcludeConfig(module)
+            thisLogger().warn("Going to cancel exclude ${excludes.size} files")
+            excludeService.cancelExcludePaths(module, excludes)
+            thisLogger().info("END")
+        }
     }
 }

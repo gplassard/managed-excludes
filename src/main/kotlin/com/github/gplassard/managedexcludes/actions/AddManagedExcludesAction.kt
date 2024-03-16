@@ -7,9 +7,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformCoreDataKeys
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
+import kotlinx.coroutines.*
 
 
-class AddManagedExcludesAction: AnAction() {
+class AddManagedExcludesAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         thisLogger().info("START")
         val module = event.getData(PlatformCoreDataKeys.MODULE)
@@ -27,9 +28,13 @@ class AddManagedExcludesAction: AnAction() {
             thisLogger().warn("No config service, aborting")
             return
         }
-        val excludes = configService.loadExcludeConfig(module)
-        thisLogger().warn("Going to exclude ${excludes.size} files")
-        excludeService.excludePaths(module, excludes)
-        thisLogger().info("END")
+        // FIXME
+        GlobalScope.launch {
+            val excludes = configService.loadExcludeConfig(module)
+            thisLogger().warn("Going to exclude ${excludes.size} files")
+            excludeService.excludePaths(module, excludes)
+            thisLogger().info("END")
+        }
+
     }
 }
