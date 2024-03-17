@@ -10,6 +10,5 @@ class AddManagedExcludesAction : BaseManagedExcludesAction() {
     override suspend fun perform(excludeService: ExcludeService, module: Module, excludes: Set<VirtualFile>) {
         thisLogger().warn("Going to exclude ${excludes.size} files")
         excludeService.excludePaths(module, excludes)
-        thisLogger().info("END")
     }
 }
