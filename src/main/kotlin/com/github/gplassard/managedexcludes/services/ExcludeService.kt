@@ -15,36 +15,34 @@ import java.util.function.Consumer
 @Service
 class ExcludeService {
 
-    suspend fun excludePaths(module: Module, paths: Set<VirtualFile>) {
-        process(module, paths) {(entry, path) ->
-            thisLogger().warn("Excluding folder $path")
+    fun excludePaths(module: Module, paths: Set<VirtualFile>) {
+        process(module, paths) { (entry, path) ->
+            thisLogger().info("Excluding folder $path")
             entry.addExcludeFolder(path)
         }
     }
 
-    suspend fun cancelExcludePaths(module: Module, paths: Set<VirtualFile>) {
-        process(module, paths) {(entry, path) ->
-            thisLogger().warn("Cancel excluding folder $path")
+    fun cancelExcludePaths(module: Module, paths: Set<VirtualFile>) {
+        process(module, paths) { (entry, path) ->
+            thisLogger().info("Cancel excluding folder $path")
             entry.removeExcludeFolder(path.url)
         }
     }
 
-    private suspend fun process(
+    private fun process(
         module: Module,
         paths: Set<VirtualFile>,
         processor: Consumer<Pair<ContentEntry, VirtualFile>>
     ) {
         val model = ModuleRootManager.getInstance(module).modifiableModel
-        withContext(Dispatchers.EDT) {
-            ApplicationManager.getApplication().runWriteAction {
-                for (entry in model.contentEntries) {
-                    for (path in paths) {
-                        processor.accept(Pair(entry, path))
-                    }
+        ApplicationManager.getApplication().runWriteAction {
+            for (entry in model.contentEntries) {
+                for (path in paths) {
+                    processor.accept(Pair(entry, path))
                 }
-                thisLogger().info("Committing model for module $module")
-                model.commit()
             }
+            thisLogger().info("Committing model for module $module")
+            model.commit()
         }
     }
 

@@ -7,13 +7,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformCoreDataKeys
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
-import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.module.Module
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.intellij.openapi.vfs.VirtualFile
 
-abstract class BaseManagedExcludesAction: AnAction() {
+abstract class BaseManagedExcludesAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
         thisLogger().info("START")
         val module = event.getData(PlatformCoreDataKeys.MODULE)
@@ -31,12 +28,10 @@ abstract class BaseManagedExcludesAction: AnAction() {
             thisLogger().warn("No config service, aborting")
             return
         }
-        CoroutineScope(Dispatchers.Default).launch {
-            val excludes = configService.loadExcludeConfig(module)
-            perform(excludeService, module, excludes)
-            thisLogger().info("END")
-        }
+        val excludes = configService.loadExcludeConfig(module)
+        perform(excludeService, module, excludes)
+        thisLogger().info("END")
     }
 
-    abstract suspend fun perform(excludeService: ExcludeService, module: Module, excludes: Set<VirtualFile>)
+    abstract fun perform(excludeService: ExcludeService, module: Module, excludes: Set<VirtualFile>)
 }

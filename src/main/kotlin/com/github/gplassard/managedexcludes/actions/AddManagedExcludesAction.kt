@@ -7,8 +7,8 @@ import com.intellij.openapi.vfs.VirtualFile
 
 
 class AddManagedExcludesAction : BaseManagedExcludesAction() {
-    override suspend fun perform(excludeService: ExcludeService, module: Module, excludes: Set<VirtualFile>) {
-        thisLogger().warn("Going to exclude ${excludes.size} files")
+    override fun perform(excludeService: ExcludeService, module: Module, excludes: Set<VirtualFile>) {
+        thisLogger().info("Going to exclude ${excludes.size} files")
         excludeService.excludePaths(module, excludes)
     }
 }
