@@ -15,7 +15,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.*
 
-@Service
+@Service(Service.Level.PROJECT)
 class ConfigService {
 
     fun loadExcludeConfig(module: Module): Set<VirtualFile> {
