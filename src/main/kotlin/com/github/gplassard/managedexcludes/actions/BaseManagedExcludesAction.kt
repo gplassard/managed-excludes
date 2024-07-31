@@ -28,7 +28,7 @@ abstract class BaseManagedExcludesAction : AnAction() {
             thisLogger().warn("No config service, aborting")
             return
         }
-        val excludes = configService.loadExcludeConfig(module)
+        val excludes = configService.loadExcludeConfig(module.project)
         perform(excludeService, module, excludes)
         thisLogger().info("END")
     }

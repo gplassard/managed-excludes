@@ -5,6 +5,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.FilenameIndex
@@ -18,12 +19,12 @@ import kotlinx.coroutines.*
 @Service(Service.Level.PROJECT)
 class ConfigService {
 
-    fun loadExcludeConfig(module: Module): Set<VirtualFile> {
+    fun loadExcludeConfig(project: Project): Set<VirtualFile> {
         val excludeFiles = ReadAction.compute<Collection<VirtualFile>, RuntimeException> {
             FilenameIndex.getVirtualFilesByName(
                 ".managed-excludes",
                 true,
-                GlobalSearchScope.projectScope(module.project)
+                GlobalSearchScope.projectScope(project)
             )
         }
         thisLogger().info("Excluding files found $excludeFiles")
