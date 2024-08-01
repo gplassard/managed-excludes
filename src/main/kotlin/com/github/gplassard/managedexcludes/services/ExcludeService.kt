@@ -2,7 +2,6 @@ package com.github.gplassard.managedexcludes.services
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.Service
-import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
@@ -15,8 +14,6 @@ import java.util.function.Consumer
 class ExcludeService(private val project: Project) {
 
     fun excludePaths(module: Module, paths: Set<VirtualFile>) {
-        val stateService = project.service<StateService>()
-        stateService.state.updatePaths(paths)
         process(module, paths) { (entry, path) ->
             thisLogger().info("Excluding folder $path")
             entry.addExcludeFolder(path)

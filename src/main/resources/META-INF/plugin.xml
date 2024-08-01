@@ -9,20 +9,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <actions>
-        <action
-                id="com.github.gplassard.managedexcludes.actions.AddManagedExcludesAction"
-                class="com.github.gplassard.managedexcludes.actions.AddManagedExcludesAction"
-                text="Add managed excludes"
-                description="Adds the managed excludes">
-            <add-to-group group-id="ToolsMenu"/>
-        </action>
-        <action
-                id="com.github.gplassard.managedexcludes.actions.CancelManagedExcludesAction"
-                class="com.github.gplassard.managedexcludes.actions.CancelManagedExcludesAction"
-                text="Cancel managed excludes"
-                description="Cancels the managed excludes">
-            <add-to-group group-id="ToolsMenu"/>
-        </action>
+
     </actions>
 
     <projectListeners>

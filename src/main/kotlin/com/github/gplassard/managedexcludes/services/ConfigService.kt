@@ -4,17 +4,10 @@ import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.fileEditor.FileDocumentManager
-import com.intellij.openapi.module.Module
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
-import kotlinx.coroutines.*
 
 @Service(Service.Level.PROJECT)
 class ConfigService {
@@ -43,7 +36,7 @@ class ConfigService {
             ?.asSequence()
             ?.filter { it.isNotBlank() }
             ?.filter { !it.startsWith("#") }
-            ?.also { thisLogger().info("Planning to exclude $it") }
+            ?.also { thisLogger().info("Planning to exclude ${it.joinToString()}") }
             ?.map { line -> excludeFile.parent.findFileByRelativePath(line) }
             ?.filterNotNull()
             ?.filter { it.exists() }
