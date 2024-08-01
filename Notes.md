@@ -10,3 +10,7 @@ https://plugins.jetbrains.com/docs/intellij/useful-links.html#repositories
 * https://plugins.jetbrains.com/docs/intellij/user-interface-components.html
 * https://plugins.jetbrains.com/docs/intellij/kotlin-ui-dsl-version-2.html
 * https://jetbrains.design/intellij/
+
+# Examples repos
+* https://github.com/aws/aws-toolkit-jetbrains
+* https://github.com/ignatov/intellij-erlang
