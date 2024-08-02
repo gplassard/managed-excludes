@@ -17,4 +17,8 @@
                 class="com.github.gplassard.managedexcludes.listeners.ExcludeConfigChangeListener"
                 topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
     </projectListeners>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.ManagedExcludeBanner"/>
+    </extensions>
 </idea-plugin>
