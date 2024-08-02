@@ -1,5 +1,6 @@
 package com.github.gplassard.managedexcludes.services
 
+import com.github.gplassard.managedexcludes.Constants
 import com.intellij.openapi.application.ReadAction
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -15,7 +16,7 @@ class ConfigService {
     fun loadExcludeConfig(project: Project): Set<VirtualFile> {
         val excludeFiles = ReadAction.compute<Collection<VirtualFile>, RuntimeException> {
             FilenameIndex.getVirtualFilesByName(
-                ".managed-excludes",
+                Constants.EXCLUDE_FILE_NAME,
                 true,
                 GlobalSearchScope.projectScope(project)
             )
@@ -35,7 +36,7 @@ class ConfigService {
             ?.split("\n")
             ?.asSequence()
             ?.filter { it.isNotBlank() }
-            ?.filter { !it.startsWith("#") }
+            ?.filter { !it.startsWith(Constants.COMMENT_PREFIX) }
             ?.also { thisLogger().info("Planning to exclude ${it.joinToString()}") }
             ?.map { line -> excludeFile.parent.findFileByRelativePath(line) }
             ?.filterNotNull()
