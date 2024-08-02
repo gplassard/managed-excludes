@@ -2,6 +2,8 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.Constants.Constraints
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import java.io.FileWriter
+import javax.xml.stream.XMLOutputFactory
 
 plugins {
     id("java") // Java support
@@ -150,5 +152,45 @@ val runIdeForUiTests by intellijPlatformTesting.runIde.registering {
 
     plugins {
         robotServerPlugin(Constraints.LATEST_VERSION)
+    }
+}
+
+
+tasks.register("generateUpdatePlugins") {
+    val theGroup = providers.gradleProperty("pluginGroup").get()
+    val theVersion = providers.gradleProperty("pluginVersion").get()
+    val since = providers.gradleProperty("pluginSinceBuild").get()
+    val until = providers.gradleProperty("pluginUntilBuild").get()
+
+    doLast {
+        val filename = "updatePlugins.xml"
+
+
+        FileWriter(filename).use { fileWriter ->
+            val outputFactory = XMLOutputFactory.newInstance()
+
+            val xmlWriter = outputFactory.createXMLStreamWriter(fileWriter)
+
+            xmlWriter.writeStartDocument()
+            xmlWriter.writeComment("See https://plugins.jetbrains.com/docs/intellij/custom-plugin-repository.html#format-of-updatepluginsxml-file")
+            xmlWriter.writeStartElement("plugins")
+
+            xmlWriter.writeStartElement("plugin")
+            xmlWriter.writeAttribute("id", theGroup)
+            xmlWriter.writeAttribute("url", "https://github.com/gplassard/managed-excludes/releases/download/v$theVersion/managed-excludes-$theVersion.zip")
+            xmlWriter.writeAttribute("version", theVersion)
+
+
+            xmlWriter.writeEmptyElement("idea-version")
+            xmlWriter.writeAttribute("since-build", since)
+            xmlWriter.writeAttribute("until-build", until)
+
+            xmlWriter.writeEndElement() // end "plugin"
+            xmlWriter.writeEndElement() // end "plugins"
+            xmlWriter.writeEndDocument()
+
+            xmlWriter.flush()
+            xmlWriter.close()
+        }
     }
 }

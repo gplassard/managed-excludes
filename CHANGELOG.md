@@ -3,6 +3,7 @@
 # managed-excludes Changelog
 
 ## [Unreleased]
+- Manage the plugin repository
 
 ## [0.0.3] - 2024-08-02
 
