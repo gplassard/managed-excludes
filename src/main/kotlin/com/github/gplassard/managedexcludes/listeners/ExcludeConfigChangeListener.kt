@@ -1,8 +1,12 @@
 package com.github.gplassard.managedexcludes.listeners
 
+import com.github.gplassard.managedexcludes.MyBundle
 import com.github.gplassard.managedexcludes.services.ConfigService
 import com.github.gplassard.managedexcludes.services.ExcludeService
 import com.github.gplassard.managedexcludes.settings.PluginSettings
+import com.intellij.notification.Notification
+import com.intellij.notification.NotificationType
+import com.intellij.notification.Notifications
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.module.ModuleUtilCore
@@ -37,6 +41,21 @@ class ExcludeConfigChangeListener(private val project: Project) : BulkFileListen
                 excludeService.excludePaths(module, toExclude)
                 excludeService.cancelExcludePaths(module, toCancelExclude)
                 stateService.state.updateExcludedPaths(toExclude)
+
+                if (toExclude.isNotEmpty() || toCancelExclude.isNotEmpty()) {
+                    Notifications.Bus.notify(
+                        Notification(
+                            MyBundle.message("notifications.group"),
+                            MyBundle.message("notification.exclusions.update.title"),
+                            MyBundle.message(
+                                "notification.exclusions.update.content",
+                                toExclude.size,
+                                toCancelExclude.size
+                            ),
+                            NotificationType.INFORMATION,
+                        )
+                    )
+                }
             }
         }
     }
