@@ -161,6 +161,7 @@ tasks.register("generateUpdatePlugins") {
     val theVersion = providers.gradleProperty("pluginVersion").get()
     val since = providers.gradleProperty("pluginSinceBuild").get()
     val until = providers.gradleProperty("pluginUntilBuild").get()
+    val name = providers.gradleProperty("pluginName").get()
 
     doLast {
         val filename = "updatePlugins.xml"
@@ -184,6 +185,10 @@ tasks.register("generateUpdatePlugins") {
             xmlWriter.writeEmptyElement("idea-version")
             xmlWriter.writeAttribute("since-build", since)
             xmlWriter.writeAttribute("until-build", until)
+
+            xmlWriter.writeStartElement("name")
+            xmlWriter.writeCharacters(name)
+            xmlWriter.writeEndElement()
 
             xmlWriter.writeEndElement() // end "plugin"
             xmlWriter.writeEndElement() // end "plugins"
