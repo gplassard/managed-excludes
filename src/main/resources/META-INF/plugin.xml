@@ -20,5 +20,6 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.ManagedExcludeBanner"/>
+        <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.BazelProjectBanner"/>
     </extensions>
 </idea-plugin>
