@@ -11,6 +11,7 @@ class PluginSettings : SimplePersistentStateComponent<PluginSettingsState>(Plugi
 
 class PluginSettingsState : BaseState() {
     var excludedPaths by stringSet()
+    var trackedBazelProjects by stringSet()
 
     fun updateExcludedPaths(files: Set<VirtualFile>) {
         excludedPaths = files.mapNotNull { it.canonicalPath }.toMutableSet()
@@ -21,5 +22,23 @@ class PluginSettingsState : BaseState() {
         return excludedPaths
             .mapNotNull { project.projectFile?.resolveFromRootOrRelative(it) }
             .toSet()
+    }
+
+    fun addTrackedBazelProject(virtualFile: VirtualFile) {
+        val path = virtualFile.canonicalPath ?: return
+        trackedBazelProjects.add(path)
+        this.incrementModificationCount()
+    }
+
+    fun removeTrackedBazelProject(virtualFile: VirtualFile) {
+        val path = virtualFile.canonicalPath ?: return
+        trackedBazelProjects.remove(path)
+        this.incrementModificationCount()
+    }
+
+    fun isTrackedBazelProject(virtualFile: VirtualFile): Boolean {
+        val path = virtualFile.canonicalPath ?: return false
+        println("Checking track ${virtualFile.canonicalPath} $trackedBazelProjects")
+        return trackedBazelProjects.contains(path)
     }
 }
