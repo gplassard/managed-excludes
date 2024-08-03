@@ -57,7 +57,7 @@ class ManagedExcludeBanner : EditorNotificationProvider, DumbAware {
         )
         excludeService.excludePaths(module, fromConfig)
 
-        settings.state.updateExcludedPaths(fromSettings)
+        settings.state.updateExcludedPaths(fromConfig)
         EditorNotifications.getInstance(project).updateNotifications(this)
     }
 

@@ -39,7 +39,7 @@ class ExcludeConfigChangeListener(private val project: Project) : BulkFileListen
                     excludeService.excludePaths(module, toExclude)
                     excludeService.cancelExcludePaths(module, toCancelExclude)
 
-                    stateService.state.updateExcludedPaths(toExclude)
+                    stateService.state.updateExcludedPaths(fromConfig)
                     EditorNotifications.getInstance(project).updateAllNotifications()
 
                     PluginNotifications.info(

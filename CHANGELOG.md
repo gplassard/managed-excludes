@@ -3,6 +3,7 @@
 # managed-excludes Changelog
 
 ## [Unreleased]
+- Fix the state update
 
 ## [0.0.4] - 2024-08-02
 
