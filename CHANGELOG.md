@@ -3,6 +3,9 @@
 # managed-excludes Changelog
 
 ## [Unreleased]
+
+## [0.0.5] - 2024-08-03
+
 - Fix the state update
 
 ## [0.0.4] - 2024-08-02
@@ -18,6 +21,7 @@
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.4...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.5...HEAD
+[0.0.5]: https://github.com/gplassard/managed-excludes/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/gplassard/managed-excludes/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/gplassard/managed-excludes/commits/v0.0.3
