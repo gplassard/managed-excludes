@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump to IntelliJ 2024.2 and JDK 21
+
 ## [0.0.5] - 2024-08-03
 
 - Fix the state update
