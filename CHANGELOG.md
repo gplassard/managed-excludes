@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Upgrade versions range to 242.*
+
 ## [0.0.5] - 2024-08-03
 
 - Fix the state update
