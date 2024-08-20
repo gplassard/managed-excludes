@@ -21,7 +21,7 @@ class ManagedExcludeBanner : EditorNotificationProvider, DumbAware {
     override fun collectNotificationData(project: Project, vf: VirtualFile): Function<in FileEditor, out JComponent?> {
         val settings = project.service<PluginSettings>()
         return Function {
-            if (vf.name != Constants.EXCLUDE_FILE_NAME) {
+            if (vf.name != Constants.EXCLUDE_FILE_NAME && vf.name != Constants.BAZELPROJECT_FILE_NAME) {
                 return@Function null
             }
             val panel = EditorNotificationPanel()

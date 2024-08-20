@@ -2,6 +2,7 @@ package com.github.gplassard.managedexcludes.services
 
 import com.github.gplassard.managedexcludes.MyBundle
 import com.github.gplassard.managedexcludes.helpers.PluginNotifications
+import com.github.gplassard.managedexcludes.services.config.ConfigService
 import com.github.gplassard.managedexcludes.settings.PluginSettings
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service

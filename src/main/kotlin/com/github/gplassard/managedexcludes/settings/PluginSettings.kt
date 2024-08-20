@@ -38,7 +38,12 @@ class PluginSettingsState : BaseState() {
 
     fun isTrackedBazelProject(virtualFile: VirtualFile): Boolean {
         val path = virtualFile.canonicalPath ?: return false
-        println("Checking track ${virtualFile.canonicalPath} $trackedBazelProjects")
         return trackedBazelProjects.contains(path)
+    }
+
+    fun resolveTrackedBazelProjects(project: Project): Set<VirtualFile> {
+        return trackedBazelProjects
+            .mapNotNull { project.projectFile?.resolveFromRootOrRelative(it) }
+            .toSet()
     }
 }

@@ -1,4 +1,4 @@
-package com.github.gplassard.managedexcludes.services
+package com.github.gplassard.managedexcludes.services.config
 
 import com.github.gplassard.managedexcludes.Constants
 import com.intellij.openapi.application.ReadAction
@@ -11,8 +11,7 @@ import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
 
 @Service(Service.Level.PROJECT)
-class ConfigService {
-
+class ManagedExcludesConfigService {
     fun loadExcludeConfig(project: Project): Set<VirtualFile> {
         val excludeFiles = ReadAction.compute<Collection<VirtualFile>, RuntimeException> {
             FilenameIndex.getVirtualFilesByName(
@@ -43,5 +42,4 @@ class ConfigService {
             ?.filter { it.exists() }
             ?.toList()
             .orEmpty()
-
 }
