@@ -27,6 +27,7 @@ https://plugins.jetbrains.com/docs/intellij/useful-links.html#repositories
 # Examples repos
 * https://github.com/aws/aws-toolkit-jetbrains
 * https://github.com/ignatov/intellij-erlang
+* https://github.com/bazelbuild/intellij
 
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
