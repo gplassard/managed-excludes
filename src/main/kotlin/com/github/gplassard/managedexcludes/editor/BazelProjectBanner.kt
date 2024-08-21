@@ -21,7 +21,7 @@ class BazelProjectBanner : EditorNotificationProvider, DumbAware {
     override fun collectNotificationData(project: Project, vf: VirtualFile): Function<in FileEditor, out JComponent?> {
         val settings = project.service<PluginSettings>()
         return Function {
-            if (vf.name != Constants.BAZELPROJECT_FILE_NAME) {
+            if (!vf.name.endsWith(Constants.BAZELPROJECT_FILE_EXTENSION)) {
                 return@Function null
             }
             val tracked = settings.state.isTrackedBazelProject(vf)

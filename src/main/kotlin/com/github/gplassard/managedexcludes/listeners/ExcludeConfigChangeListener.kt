@@ -18,7 +18,7 @@ class ExcludeConfigChangeListener(private val project: Project) : BulkFileListen
     override fun after(events: MutableList<out VFileEvent>) {
         for (event in events) {
             val excludeChange = event.path.endsWith(Constants.EXCLUDE_FILE_NAME)
-            val bazelProjectChange = event.path.endsWith(Constants.BAZELPROJECT_FILE_NAME)
+            val bazelProjectChange = event.path.endsWith(Constants.BAZELPROJECT_FILE_EXTENSION)
             if (excludeChange || bazelProjectChange) {
                 val virtualFile = event.file ?: continue
                 val module = ModuleUtilCore.findModuleForFile(virtualFile, project) ?: continue
