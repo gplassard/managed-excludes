@@ -16,7 +16,7 @@ class ConfigService {
         val bazelProjectConfigService = project.service<BazelProjectConfigService>()
 
         val bazelProjectsExcluded = settings.state.resolveTrackedBazelProjects(project)
-            .flatMap { bazelProjectConfigService.loadExcludeConfig(it) }
+            .flatMap { bazelProjectConfigService.loadExcludeConfig(project, it) }
             .toSet()
         val managedExcludeExcluded = managedExcludesConfigService.loadExcludeConfig(project)
 
