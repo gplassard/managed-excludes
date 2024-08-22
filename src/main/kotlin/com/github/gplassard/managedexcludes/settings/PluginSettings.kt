@@ -15,8 +15,8 @@ class PluginSettingsState : BaseState() {
     var trackedBazelProjects by stringSet()
 
     fun updateExcludedPaths(files: Set<VirtualFile>) {
-        thisLogger().info("Updating excluded paths: ${files.map { it.canonicalPath }}")
-        excludedPaths = files.mapNotNull { it.canonicalPath }.toMutableSet()
+        thisLogger().info("Updating excluded paths: ${files.map { it.path }}")
+        excludedPaths = files.map { it.path }.toMutableSet()
         this.incrementModificationCount()
     }
 
@@ -25,26 +25,26 @@ class PluginSettingsState : BaseState() {
         val resolved = excludedPaths
             .mapNotNull { project.projectFile?.resolveFromRootOrRelative(it) }
             .toSet()
-        thisLogger().info("Resolved excluded paths: ${resolved.map { it.canonicalPath }}")
+        thisLogger().info("Resolved excluded paths: ${resolved.map { it.path }}")
         return resolved
     }
 
     fun addTrackedBazelProject(virtualFile: VirtualFile) {
-        thisLogger().info("Adding tracked Bazel project: ${virtualFile.canonicalPath}")
-        val path = virtualFile.canonicalPath ?: return
+        thisLogger().info("Adding tracked Bazel project: ${virtualFile.path}")
+        val path = virtualFile.path ?: return
         trackedBazelProjects.add(path)
         this.incrementModificationCount()
     }
 
     fun removeTrackedBazelProject(virtualFile: VirtualFile) {
-        thisLogger().info("Removing tracked Bazel project: ${virtualFile.canonicalPath}")
-        val path = virtualFile.canonicalPath ?: return
+        thisLogger().info("Removing tracked Bazel project: ${virtualFile.path}")
+        val path = virtualFile.path ?: return
         trackedBazelProjects.remove(path)
         this.incrementModificationCount()
     }
 
     fun isTrackedBazelProject(virtualFile: VirtualFile): Boolean {
-        val path = virtualFile.canonicalPath ?: return false
+        val path = virtualFile.path ?: return false
         return trackedBazelProjects.contains(path)
     }
 
@@ -53,7 +53,7 @@ class PluginSettingsState : BaseState() {
         val resolved =  trackedBazelProjects
             .mapNotNull { project.projectFile?.resolveFromRootOrRelative(it) }
             .toSet()
-        thisLogger().info("Resolved tracked Bazel projects files: ${resolved.map { it.canonicalPath }}")
+        thisLogger().info("Resolved tracked Bazel projects files: ${resolved.map { it.path }}")
         return resolved
     }
 }
