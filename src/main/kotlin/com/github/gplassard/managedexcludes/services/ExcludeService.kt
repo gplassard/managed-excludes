@@ -1,6 +1,6 @@
 package com.github.gplassard.managedexcludes.services
 
-import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.writeAction
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.module.Module
@@ -12,27 +12,27 @@ import java.util.function.Consumer
 @Service(Service.Level.PROJECT)
 class ExcludeService {
 
-    fun excludePaths(module: Module, paths: Set<VirtualFile>) {
+    suspend fun excludePaths(module: Module, paths: Set<VirtualFile>) {
         process(module, paths) { (entry, path) ->
             thisLogger().info("Excluding folder $path")
             entry.addExcludeFolder(path)
         }
     }
 
-    fun cancelExcludePaths(module: Module, paths: Set<VirtualFile>) {
+    suspend fun cancelExcludePaths(module: Module, paths: Set<VirtualFile>) {
         process(module, paths) { (entry, path) ->
             thisLogger().info("Cancel excluding folder $path")
             entry.removeExcludeFolder(path.url)
         }
     }
 
-    private fun process(
+    private suspend fun process(
         module: Module,
         paths: Set<VirtualFile>,
         processor: Consumer<Pair<ContentEntry, VirtualFile>>
     ) {
         val model = ModuleRootManager.getInstance(module).modifiableModel
-        ApplicationManager.getApplication().runWriteAction {
+        writeAction {
             for (entry in model.contentEntries) {
                 for (path in paths) {
                     processor.accept(Pair(entry, path))

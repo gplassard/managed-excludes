@@ -10,7 +10,7 @@ import com.intellij.openapi.vfs.VirtualFile
 @Service(Service.Level.PROJECT)
 class ConfigService {
 
-    fun loadExcludeConfig(project: Project): Set<VirtualFile> {
+    suspend fun loadExcludeConfig(project: Project): Set<VirtualFile> {
         val settings = project.service<PluginSettings>()
         val managedExcludesConfigService = project.service<ManagedExcludesConfigService>()
         val bazelProjectConfigService = project.service<BazelProjectConfigService>()
