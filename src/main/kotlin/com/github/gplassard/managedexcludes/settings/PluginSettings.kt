@@ -12,7 +12,7 @@ class PluginSettings : SimplePersistentStateComponent<PluginSettingsState>(Plugi
 
 class PluginSettingsState : BaseState() {
     var excludedPaths by stringSet()
-    var trackedBazelProjects by stringSet()
+    private var trackedBazelProjects by stringSet()
 
     fun updateExcludedPaths(files: Set<VirtualFile>) {
         thisLogger().info("Updating excluded paths: ${files.map { it.path }}")
@@ -31,20 +31,20 @@ class PluginSettingsState : BaseState() {
 
     fun addTrackedBazelProject(virtualFile: VirtualFile) {
         thisLogger().info("Adding tracked Bazel project: ${virtualFile.path}")
-        val path = virtualFile.path ?: return
+        val path = virtualFile.path
         trackedBazelProjects.add(path)
         this.incrementModificationCount()
     }
 
     fun removeTrackedBazelProject(virtualFile: VirtualFile) {
         thisLogger().info("Removing tracked Bazel project: ${virtualFile.path}")
-        val path = virtualFile.path ?: return
+        val path = virtualFile.path
         trackedBazelProjects.remove(path)
         this.incrementModificationCount()
     }
 
     fun isTrackedBazelProject(virtualFile: VirtualFile): Boolean {
-        val path = virtualFile.path ?: return false
+        val path = virtualFile.path
         return trackedBazelProjects.contains(path)
     }
 
