@@ -1,6 +1,7 @@
 [versions]
 # libraries
 junit = "4.13.2"
+assertj = "3.11.1"
 
 # plugins
 changelog = "2.2.1"
@@ -11,6 +12,7 @@ qodana = "2024.1.9"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }

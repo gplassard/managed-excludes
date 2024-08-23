@@ -18,6 +18,7 @@ https://github.com/JetBrains/intellij-community/blob/master/platform/lang-impl/s
 https://github.com/JetBrains/intellij-community/blob/master/python/resources/META-INF/pycharm-core.xml#L49
 
 https://plugins.jetbrains.com/docs/intellij/useful-links.html#repositories
+https://plugins.jetbrains.com/docs/intellij/kotlin-coroutines.html
 
 # UI
 * https://plugins.jetbrains.com/docs/intellij/user-interface-components.html
@@ -27,6 +28,7 @@ https://plugins.jetbrains.com/docs/intellij/useful-links.html#repositories
 # Examples repos
 * https://github.com/aws/aws-toolkit-jetbrains
 * https://github.com/ignatov/intellij-erlang
+* https://github.com/bazelbuild/intellij
 
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template

@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Support for `*.bazelproject` [files](https://ij.bazel.build/docs/project-views.html)
+
 ## [0.0.6] - 2024-08-09
 
 - Upgrade versions range to 242.*
