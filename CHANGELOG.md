@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.7] - 2024-08-23
+
 - Support for `*.bazelproject` [files](https://ij.bazel.build/docs/project-views.html)
 
 ## [0.0.6] - 2024-08-09
@@ -27,7 +29,8 @@
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.6...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.7...HEAD
+[0.0.7]: https://github.com/gplassard/managed-excludes/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/gplassard/managed-excludes/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/gplassard/managed-excludes/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/gplassard/managed-excludes/compare/v0.0.3...v0.0.4
