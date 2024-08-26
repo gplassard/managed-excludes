@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Add the debug dialog
+
 ## [0.0.7] - 2024-08-23
 
 - Support for `*.bazelproject` [files](https://ij.bazel.build/docs/project-views.html)

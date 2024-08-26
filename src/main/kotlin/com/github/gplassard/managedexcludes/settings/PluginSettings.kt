@@ -12,7 +12,7 @@ class PluginSettings : SimplePersistentStateComponent<PluginSettingsState>(Plugi
 
 class PluginSettingsState : BaseState() {
     var excludedPaths by stringSet()
-    private var trackedBazelProjects by stringSet()
+    var trackedBazelProjects by stringSet()
 
     fun updateExcludedPaths(files: Set<VirtualFile>) {
         thisLogger().info("Updating excluded paths: ${files.map { it.path }}")
