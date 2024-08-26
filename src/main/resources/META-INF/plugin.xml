@@ -9,7 +9,9 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <actions>
-
+        <action id="ManagedExcludesShowDebug" class="com.github.gplassard.managedexcludes.actions.ShowDebug" text="Debug Managed Excludes" description="Open the debug panel">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
     </actions>
 
     <projectListeners>
