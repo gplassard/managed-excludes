@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Add more debug info to the debug dialog
+
 ## [0.0.8] - 2024-08-26
 
 - Add the debug dialog
