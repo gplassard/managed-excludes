@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.9] - 2024-08-27
+
 - Add more debug info to the debug dialog
 
 ## [0.0.8] - 2024-08-26
@@ -35,7 +37,8 @@
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.8...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.9...HEAD
+[0.0.9]: https://github.com/gplassard/managed-excludes/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/gplassard/managed-excludes/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/gplassard/managed-excludes/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/gplassard/managed-excludes/compare/v0.0.5...v0.0.6
