@@ -30,7 +30,3 @@ jobs:
               draft: false
             });
             core.setOutput("html_url", release.html_url);
-
-      - name: Output release URL
-        run:
-          echo "Release URL: ${{ steps.publish_release.outputs.html_url }}"
