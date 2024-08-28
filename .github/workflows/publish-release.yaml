@@ -1,0 +1,36 @@
+name: Publish Draft Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: 'ID of the draft release to publish'
+        required: true
+        type: string
+
+jobs:
+  publish_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Publish Draft Release
+        id: publish_release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const release_id = '${{ github.event.inputs.release_id }}';
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+            const { data: release } = await octokit.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id,
+              draft: false
+            });
+            core.setOutput("html_url", release.html_url);
+
+      - name: Output release URL
+        run:
+          echo "Release URL: ${{ steps.publish_release.outputs.html_url }}"
