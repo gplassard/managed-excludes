@@ -2,6 +2,7 @@ package com.github.gplassard.managedexcludes.settings
 
 import com.intellij.openapi.components.*
 import com.intellij.openapi.diagnostic.thisLogger
+import com.intellij.openapi.project.BaseProjectDirectories.Companion.getBaseDirectories
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.resolveFromRootOrRelative
@@ -23,7 +24,8 @@ class PluginSettingsState : BaseState() {
     fun resolveExcludedPaths(project: Project): Set<VirtualFile> {
         thisLogger().info("Resolving excluded paths: $trackedBazelProjects")
         val resolved = excludedPaths
-            .mapNotNull { project.projectFile?.resolveFromRootOrRelative(it) }
+            .flatMap { path -> project.getBaseDirectories().map { it.resolveFromRootOrRelative(path) } }
+            .filterNotNull()
             .toSet()
         thisLogger().info("Resolved excluded paths: ${resolved.map { it.path }}")
         return resolved
@@ -51,7 +53,8 @@ class PluginSettingsState : BaseState() {
     fun resolveTrackedBazelProjects(project: Project): Set<VirtualFile> {
         thisLogger().info("Resolving tracked Bazel projects files: $trackedBazelProjects")
         val resolved =  trackedBazelProjects
-            .mapNotNull { project.projectFile?.resolveFromRootOrRelative(it) }
+            .flatMap { path -> project.getBaseDirectories().map { it.resolveFromRootOrRelative(path) } }
+            .filterNotNull()
             .toSet()
         thisLogger().info("Resolved tracked Bazel projects files: ${resolved.map { it.path }}")
         return resolved

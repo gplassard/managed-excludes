@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Change the way path resolution is done
+
 ## [0.0.9] - 2024-08-27
 
 - Add more debug info to the debug dialog
