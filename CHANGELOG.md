@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Additional logging
+
 ## [0.0.10] - 2024-08-28
 
 - Change the way path resolution is done
