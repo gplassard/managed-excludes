@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Fix a bug for bazelproject files containing blank lines
+
 ## [0.0.11] - 2024-09-12
 
 - Additional logging
