@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.12] - 2024-09-13
+
 - Fix a bug for bazelproject files containing blank lines
 - Bump IDEA version range
 
@@ -48,7 +50,8 @@
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.11...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.12...HEAD
+[0.0.12]: https://github.com/gplassard/managed-excludes/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/gplassard/managed-excludes/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/gplassard/managed-excludes/compare/v0.0.9...v0.0.10
 [0.0.9]: https://github.com/gplassard/managed-excludes/compare/v0.0.8...v0.0.9
