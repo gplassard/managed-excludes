@@ -5,6 +5,7 @@
 ## [Unreleased]
 
 - Fix a bug for bazelproject files containing blank lines
+- Bump IDEA version range
 
 ## [0.0.11] - 2024-09-12
 
