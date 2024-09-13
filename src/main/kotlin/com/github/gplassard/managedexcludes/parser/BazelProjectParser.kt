@@ -9,6 +9,7 @@ object BazelProjectParser {
 
         return content.lineSequence()
             .filterNot { it.trim().startsWith("#") }  // ignore all comment lines
+            .filterNot { it.trim().isEmpty() }        // ignore blank lines
             .dropWhile { it.trim() != "directories:" }      // Drop lines until "directories:" is found
             .drop(1)                                        // Skip the "directories:" line
             .also { thisLogger().info("After directories ${it.joinToString()}") }
