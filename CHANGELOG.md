@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump IDEA version range
+
 ## [0.0.14] - 2024-11-17
 
 - Bump to IntelliJ 2024.3 and JDK 21
