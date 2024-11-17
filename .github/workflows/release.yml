@@ -70,7 +70,7 @@ jobs:
 
       # Build
       - name: Build
-        run: ./gradlew build generateUpdatePlugins
+        run: ./gradlew build generateUpdatePlugins buildPlugin
 
       # Upload artifact as a release asset
       - name: Upload Release Asset
