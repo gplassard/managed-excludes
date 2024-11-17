@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.14] - 2024-11-17
+
 - Bump to IntelliJ 2024.3 and JDK 21
 
 ## [0.0.12] - 2024-09-13
@@ -52,7 +54,8 @@
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.12...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.14...HEAD
+[0.0.14]: https://github.com/gplassard/managed-excludes/compare/v0.0.12...v0.0.14
 [0.0.12]: https://github.com/gplassard/managed-excludes/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/gplassard/managed-excludes/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/gplassard/managed-excludes/compare/v0.0.9...v0.0.10
