@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump to IntelliJ 2024.2 and JDK 21
+
 ## [0.0.12] - 2024-09-13
 
 - Fix a bug for bazelproject files containing blank lines
