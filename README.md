@@ -16,11 +16,18 @@ apps/go-app/lib
 # The paths are relative to the current file's directory 
 apps/go-app/app
 ```
+![managed-excludes](./docs/managed-excludes.png)
 
 ## Bazel project files
 
 The plugin also provides support for `*.bazelproject` [files](https://ij.bazel.build/docs/project-views.html) and will prompt you to track them in order to track excluded paths from the file
 (only explicit exclusions are supported, there is no support for the allow pattern)
+![bazelproject](./docs/bazelproject.png)
+
+## Debug
+
+You can display the configuration of the plugin by invoking the "Debug managed excludes" intention. 
+![debug](./docs/debug-intention.png)
 
 <!-- Plugin description end -->
 
@@ -34,6 +41,8 @@ The plugin also provides support for `*.bazelproject` [files](https://ij.bazel.b
   
   You can use https://raw.githubusercontent.com/gplassard/managed-excludes/main/updatePlugins.xml as a plugin repository
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Manage Plugin Repositories...</kbd>
+  ![manage repositories](./docs/manage-repositories.png)
+  ![add custom repository](./docs/custom-repository.png)
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
