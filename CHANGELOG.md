@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 
+- Change the debug view as an intention instead of an action
 - Sign the plugin when releasing it
 - Bump IDEA version range
 

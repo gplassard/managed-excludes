@@ -8,12 +8,6 @@
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
-    <actions>
-        <action id="ManagedExcludesShowDebug" class="com.github.gplassard.managedexcludes.actions.ShowDebug" text="Debug Managed Excludes" description="Open the debug panel">
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-        </action>
-    </actions>
-
     <projectListeners>
         <listener
                 class="com.github.gplassard.managedexcludes.listeners.ExcludeConfigChangeListener"
@@ -23,5 +17,10 @@
     <extensions defaultExtensionNs="com.intellij">
         <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.ManagedExcludeBanner"/>
         <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.BazelProjectBanner"/>
+        <intentionAction>
+            <language>TEXT</language> <!-- available in 2022.3 and later -->
+            <className>com.github.gplassard.managedexcludes.intention.DebugIntention</className>
+            <category>Plugin intentions</category>
+        </intentionAction>
     </extensions>
 </idea-plugin>
