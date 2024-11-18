@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.15] - 2024-11-18
+
 - Change the debug view as an intention instead of an action
 - Sign the plugin when releasing it
 - Bump IDEA version range
@@ -58,7 +60,8 @@
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.14...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.15...HEAD
+[0.0.15]: https://github.com/gplassard/managed-excludes/compare/v0.0.14...v0.0.15
 [0.0.14]: https://github.com/gplassard/managed-excludes/compare/v0.0.12...v0.0.14
 [0.0.12]: https://github.com/gplassard/managed-excludes/compare/v0.0.11...v0.0.12
 [0.0.11]: https://github.com/gplassard/managed-excludes/compare/v0.0.10...v0.0.11
