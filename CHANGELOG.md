@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 
+- Sign the plugin when releasing it
 - Bump IDEA version range
 
 ## [0.0.14] - 2024-11-17
