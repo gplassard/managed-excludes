@@ -179,7 +179,7 @@ tasks.register("generateUpdatePlugins") {
 
             xmlWriter.writeStartElement("plugin")
             xmlWriter.writeAttribute("id", theGroup)
-            xmlWriter.writeAttribute("url", "https://github.com/gplassard/managed-excludes/releases/download/v$theVersion/managed-excludes-$theVersion.zip")
+            xmlWriter.writeAttribute("url", "https://github.com/gplassard/managed-excludes/releases/download/v$theVersion/managed-excludes-$theVersion-signed.zip")
             xmlWriter.writeAttribute("version", theVersion)
 
 
