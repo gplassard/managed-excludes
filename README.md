@@ -29,6 +29,10 @@ The plugin also provides support for `*.bazelproject` [files](https://ij.bazel.b
 You can display the configuration of the plugin by invoking the "Debug managed excludes" intention. 
 ![debug](./docs/debug-intention.png)
 
+## Jetbrains Gateway
+
+When used in conjunction with Jetbrains Gateway, this plugin should be installed on the host. 
+
 <!-- Plugin description end -->
 
 ## Installation
