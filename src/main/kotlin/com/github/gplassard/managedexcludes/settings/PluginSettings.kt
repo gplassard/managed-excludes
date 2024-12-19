@@ -14,6 +14,7 @@ class PluginSettings : SimplePersistentStateComponent<PluginSettingsState>(Plugi
 class PluginSettingsState : BaseState() {
     var excludedPaths by stringSet()
     var trackedBazelProjects by stringSet()
+    var excludedBazelWorkspaces by stringSet()
 
     fun updateExcludedPaths(files: Set<VirtualFile>) {
         thisLogger().info("Updating excluded paths: ${files.map { it.path }}")
@@ -57,6 +58,35 @@ class PluginSettingsState : BaseState() {
             .filterNotNull()
             .toSet()
         thisLogger().info("Resolved tracked Bazel projects files: ${resolved.map { it.path }}")
+        return resolved
+    }
+
+    fun addExcludedBazelWorkspace(virtualFile: VirtualFile) {
+        thisLogger().info("Adding excluded Bazel workspace: ${virtualFile.path}")
+        val path = virtualFile.path
+        excludedBazelWorkspaces.add(path)
+        this.incrementModificationCount()
+    }
+
+    fun removeExcludedBazelWorkspace(virtualFile: VirtualFile) {
+        thisLogger().info("Removing excluded Bazel workspace: ${virtualFile.path}")
+        val path = virtualFile.path
+        excludedBazelWorkspaces.remove(path)
+        this.incrementModificationCount()
+    }
+
+    fun isExcludedBazelWorkspace(virtualFile: VirtualFile): Boolean {
+        val path = virtualFile.path
+        return excludedBazelWorkspaces.contains(path)
+    }
+
+    fun resolveExcludedBazelWorkspaces(project: Project): Set<VirtualFile> {
+        thisLogger().info("Resolving excluded Bazel workspace files: $excludedBazelWorkspaces")
+        val resolved =  excludedBazelWorkspaces
+            .flatMap { path -> project.getBaseDirectories().map { it.resolveFromRootOrRelative(path) } }
+            .filterNotNull()
+            .toSet()
+        thisLogger().info("Resolved excluded Bazel workspace files: ${resolved.map { it.path }}")
         return resolved
     }
 }

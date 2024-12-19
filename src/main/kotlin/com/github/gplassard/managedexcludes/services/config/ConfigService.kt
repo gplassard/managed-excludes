@@ -14,14 +14,18 @@ class ConfigService {
         val settings = project.service<PluginSettings>()
         val managedExcludesConfigService = project.service<ManagedExcludesConfigService>()
         val bazelProjectConfigService = project.service<BazelProjectConfigService>()
+        val bazelWorkspacesConfigService = project.service<BazelWorkspacesConfigService>()
 
         val bazelProjectsExcluded = settings.state.resolveTrackedBazelProjects(project)
             .flatMap { bazelProjectConfigService.loadExcludeConfig(project, it) }
             .toSet()
+
+        val bazelWorkspaceExcluded = bazelWorkspacesConfigService.loadExcludeConfig(project, settings.state.resolveExcludedBazelWorkspaces(project))
+
         val managedExcludeExcluded = managedExcludesConfigService.loadExcludeConfig(project)
 
-
         return bazelProjectsExcluded
+            .plus(bazelWorkspaceExcluded)
             .plus(managedExcludeExcluded)
             .also { thisLogger().info("Aggregation done, there is a total of ${it.size} distinct paths to exclude") }
     }

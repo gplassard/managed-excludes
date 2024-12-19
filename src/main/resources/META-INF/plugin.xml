@@ -17,6 +17,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.ManagedExcludeBanner"/>
         <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.BazelProjectBanner"/>
+        <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.BazelWorkspaceBanner"/>
         <intentionAction>
             <language>TEXT</language> <!-- available in 2022.3 and later -->
             <className>com.github.gplassard.managedexcludes.intention.DebugIntention</className>
