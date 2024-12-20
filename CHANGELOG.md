@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+- The plugin now autodetect `WORKSPACE.bazel` and `WORKSPACE` files and will automatically 
+exclude bazel output directories unless you specifically untrack the Workspace file.
+
 ## [0.0.15] - 2024-11-18
 
 - Change the debug view as an intention instead of an action

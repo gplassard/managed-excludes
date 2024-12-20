@@ -23,6 +23,8 @@ apps/go-app/app
 The plugin also provides support for `*.bazelproject` [files](https://ij.bazel.build/docs/project-views.html) and will prompt you to track them in order to track excluded paths from the file
 (only explicit exclusions are supported, there is no support for the allow pattern)
 ![bazelproject](./docs/bazelproject.png)
+Detected `WORKSPACE.bazel` or `WORKSPACE` files will also automatically exclude their output directories unless you specifically disable it.
+
 
 ## Debug
 

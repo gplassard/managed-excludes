@@ -23,6 +23,8 @@ class DebugDialog(
     override fun createCenterPanel(): JComponent {
         val trackedProjects = state.trackedBazelProjects
         val resolvedTrackedProjects = state.resolveTrackedBazelProjects(project)
+        val excludedBazelWorkspaces = state.excludedBazelWorkspaces
+        val resolvedExcludedBazelWorkspaces = state.resolveExcludedBazelWorkspaces(project)
         val excludedPaths = state.excludedPaths
         val resolvedExcludedPaths = state.resolveExcludedPaths(project)
         return panel {
@@ -58,6 +60,20 @@ class DebugDialog(
             }
             group("Resolved Tracked Projects:") {
                 for (p in resolvedTrackedProjects) {
+                    row {
+                        label("${p.canonicalPath}")
+                    }
+                }
+            }
+            group("Excluded Bazel Workspaces:") {
+                for (p in excludedBazelWorkspaces) {
+                    row {
+                        label(p)
+                    }
+                }
+            }
+            group("Resolved Excluded Bazel Workspaces:") {
+                for (p in resolvedExcludedBazelWorkspaces) {
                     row {
                         label("${p.canonicalPath}")
                     }
