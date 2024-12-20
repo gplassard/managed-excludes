@@ -21,7 +21,7 @@ apps/go-app/app
 ## Bazel project files
 
 The plugin also provides support for `*.bazelproject` [files](https://ij.bazel.build/docs/project-views.html) and will prompt you to track them in order to track excluded paths from the file
-(only explicit exclusions are supported, there is no support for the allow pattern)
+(only explicit exclusions are supported, there is no support for the allow pattern).
 ![bazelproject](./docs/bazelproject.png)
 Detected `WORKSPACE.bazel` or `WORKSPACE` files will also automatically exclude their output directories unless you specifically disable it.
 
@@ -38,17 +38,17 @@ When used in conjunction with Jetbrains Gateway, this plugin should be installed
 <!-- Plugin description end -->
 
 ## Installation
-- Manually:
-
-  Download the [latest release](https://github.com/gplassard/managed-excludes/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
-- Through a custom plugin repository :
+- Through a custom plugin repository (recommended) :
   
   You can use https://raw.githubusercontent.com/gplassard/managed-excludes/main/updatePlugins.xml as a plugin repository
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Manage Plugin Repositories...</kbd>
   ![manage repositories](./docs/manage-repositories.png)
   ![add custom repository](./docs/custom-repository.png)
+
+- Manually:
+
+  Download the [latest release](https://github.com/gplassard/managed-excludes/releases/latest) and install it manually using
+  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
