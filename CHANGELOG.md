@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.16] - 2024-12-20
+
 - The plugin now autodetect `WORKSPACE.bazel` and `WORKSPACE` files and will automatically 
 exclude bazel output directories unless you specifically untrack the Workspace file.
 
@@ -63,7 +65,8 @@ exclude bazel output directories unless you specifically untrack the Workspace f
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.15...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.16...HEAD
+[0.0.16]: https://github.com/gplassard/managed-excludes/compare/v0.0.15...v0.0.16
 [0.0.15]: https://github.com/gplassard/managed-excludes/compare/v0.0.14...v0.0.15
 [0.0.14]: https://github.com/gplassard/managed-excludes/compare/v0.0.12...v0.0.14
 [0.0.12]: https://github.com/gplassard/managed-excludes/compare/v0.0.11...v0.0.12
