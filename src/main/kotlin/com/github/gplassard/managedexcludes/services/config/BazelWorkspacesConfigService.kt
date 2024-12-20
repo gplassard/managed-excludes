@@ -16,11 +16,14 @@ class BazelWorkspacesConfigService {
 
     suspend fun loadExcludeConfig(project: Project, excludedWorkspaces: Set<VirtualFile>): Set<VirtualFile> {
         val workspaceFiles = readAction {
-            FilenameIndex.getVirtualFilesByName(
-                Constants.BAZEL_WORKSPACE_FILE_NAME,
-                true,
-                GlobalSearchScope.projectScope(project)
-            )
+            Constants.BAZEL_WORKSPACE_FILE_NAMES
+                .flatMap { filename ->
+                    FilenameIndex.getVirtualFilesByName(
+                        filename,
+                        true,
+                        GlobalSearchScope.projectScope(project)
+                    )
+                }
         }
         thisLogger().info("Workspace files found $workspaceFiles")
 

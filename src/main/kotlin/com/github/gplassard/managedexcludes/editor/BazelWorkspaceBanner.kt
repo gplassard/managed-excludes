@@ -27,7 +27,7 @@ class BazelWorkspaceBanner : EditorNotificationProvider, DumbAware {
     override fun collectNotificationData(project: Project, vf: VirtualFile): Function<in FileEditor, out JComponent?> {
         val settings = project.service<PluginSettings>()
         return Function {
-            if (!vf.name.endsWith(Constants.BAZEL_WORKSPACE_FILE_NAME)) {
+            if (!Constants.BAZEL_WORKSPACE_FILE_NAMES.contains(vf.name)) {
                 return@Function null
             }
             val excluded = settings.state.isExcludedBazelWorkspace(vf)

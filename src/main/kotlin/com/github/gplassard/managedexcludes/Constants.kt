@@ -5,6 +5,9 @@ class Constants {
         const val EXCLUDE_FILE_NAME = ".managed-excludes"
         const val COMMENT_PREFIX = "#"
         const val BAZELPROJECT_FILE_EXTENSION = ".bazelproject"
-        const val BAZEL_WORKSPACE_FILE_NAME = "WORKSPACE.bazel"
+        val BAZEL_WORKSPACE_FILE_NAMES = setOf(
+            "WORKSPACE.bazel",
+            "WORKSPACE",
+        )
     }
 }

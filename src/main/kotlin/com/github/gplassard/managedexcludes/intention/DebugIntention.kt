@@ -31,7 +31,7 @@ class DebugIntention : IntentionAction, LowPriorityAction {
         return file != null && (
                 file.name.endsWith(Constants.BAZELPROJECT_FILE_EXTENSION)
                         || file.name == Constants.EXCLUDE_FILE_NAME
-                        || file.name == Constants.BAZEL_WORKSPACE_FILE_NAME
+                        || Constants.BAZEL_WORKSPACE_FILE_NAMES.contains(file.name)
                 )
     }
 
