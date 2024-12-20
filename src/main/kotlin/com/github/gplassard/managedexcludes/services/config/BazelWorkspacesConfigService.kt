@@ -1,7 +1,6 @@
 package com.github.gplassard.managedexcludes.services.config
 
 import com.github.gplassard.managedexcludes.Constants
-import com.github.gplassard.managedexcludes.helpers.PluginNotifications
 import com.github.gplassard.managedexcludes.parser.BazelWorkspaceParser
 import com.intellij.openapi.application.readAction
 import com.intellij.openapi.components.Service
