@@ -76,4 +76,17 @@ class BazelWorkspaceParserTest {
         assertThat(result).isNull()
     }
 
+
+    @Test
+    fun workspaceOutputDirs() {
+        val result = BazelWorkspaceParser.workspaceOutputDirs("bazel_playground")
+
+        assertThat(result).containsExactlyElementsOf(setOf(
+            "bazel-bin",
+            "bazel-out",
+            "bazel-testlogs",
+            "bazel-bazel-playground",
+        ))
+    }
+
 }
