@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- The plugin now infers the right bazel output directory for workspace names containing `_`
+
 ## [0.0.16] - 2024-12-20
 
 - The plugin now autodetect `WORKSPACE.bazel` and `WORKSPACE` files and will automatically 

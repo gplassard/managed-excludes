@@ -7,4 +7,14 @@ object BazelWorkspaceParser {
         val matchResult = regex.find(content)
         return matchResult?.groups?.get(1)?.value
     }
+
+    fun workspaceOutputDirs(workspaceName: String?): Set<String> {
+        val baseExcludes = setOf("bazel-bin", "bazel-out", "bazel-testlogs")
+
+        if (workspaceName == null) {
+            return baseExcludes
+        }
+        return baseExcludes
+            .plus("bazel-${workspaceName.replace("_", "-")}")
+    }
 }
