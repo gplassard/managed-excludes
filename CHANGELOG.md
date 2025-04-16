@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump IDEA version range
+
 ## [0.0.17] - 2024-12-21
 
 - The plugin now infers the right bazel output directory for workspace names containing `_`
