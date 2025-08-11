@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump IDEA version range
+
 ## [0.0.18] - 2025-04-16
 
 - Bump IDEA version range
