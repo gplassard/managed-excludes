@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.22] - 2025-12-09
+
 - No op release
 
 ## [0.0.21] - 2025-08-11
@@ -87,7 +89,10 @@ exclude bazel output directories unless you specifically untrack the Workspace f
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.19...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.22...HEAD
+[0.0.22]: https://github.com/gplassard/managed-excludes/compare/v0.0.21...v0.0.22
+[0.0.21]: https://github.com/gplassard/managed-excludes/compare/v0.0.20...v0.0.21
+[0.0.20]: https://github.com/gplassard/managed-excludes/compare/v0.0.19...v0.0.20
 [0.0.19]: https://github.com/gplassard/managed-excludes/compare/v0.0.18...v0.0.19
 [0.0.18]: https://github.com/gplassard/managed-excludes/compare/v0.0.17...v0.0.18
 [0.0.17]: https://github.com/gplassard/managed-excludes/compare/v0.0.16...v0.0.17
