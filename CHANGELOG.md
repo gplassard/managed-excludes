@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+- No op release
+
+## [0.0.21] - 2025-08-11
+
+- No op release
+
+## [0.0.20] - 2025-09-12
+
+- Bump IDEA version range
+
 ## [0.0.19] - 2025-08-11
 
 - Bump IDEA version range
