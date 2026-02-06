@@ -29,7 +29,7 @@ https://plugins.jetbrains.com/docs/intellij/kotlin-coroutines.html
 * https://github.com/aws/aws-toolkit-jetbrains
 * https://github.com/ignatov/intellij-erlang
 * https://github.com/bazelbuild/intellij
-
+* https://github.com/JetBrains/intellij-ide-starter
 
 [template]: https://github.com/JetBrains/intellij-platform-plugin-template
 [docs:plugin-description]: https://plugins.jetbrains.com/docs/intellij/plugin-user-experience.html#plugin-description-and-presentation
