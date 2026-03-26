@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump IDEA version range
+
 ## [0.0.22] - 2025-12-09
 
 - No op release
