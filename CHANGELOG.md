@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.23] - 2026-03-26
+
 - Bump IDEA version range
 
 ## [0.0.22] - 2025-12-09
@@ -91,7 +93,8 @@ exclude bazel output directories unless you specifically untrack the Workspace f
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.22...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.23...HEAD
+[0.0.23]: https://github.com/gplassard/managed-excludes/compare/v0.0.22...v0.0.23
 [0.0.22]: https://github.com/gplassard/managed-excludes/compare/v0.0.21...v0.0.22
 [0.0.21]: https://github.com/gplassard/managed-excludes/compare/v0.0.20...v0.0.21
 [0.0.20]: https://github.com/gplassard/managed-excludes/compare/v0.0.19...v0.0.20
