@@ -30,7 +30,7 @@ class BazelWorkspaceBanner : EditorNotificationProvider, DumbAware {
             if (!Constants.BAZEL_WORKSPACE_FILE_NAMES.contains(vf.name)) {
                 return@Function null
             }
-            val excluded = settings.state.isExcludedBazelWorkspace(vf)
+            val excluded = settings.state.isExcludedBazelWorkspace(project, vf)
             val panel = EditorNotificationPanel()
             if (excluded) {
                 panel.text(MyBundle.message("banner.bazelworkspace.excluded"))
@@ -53,7 +53,7 @@ class BazelWorkspaceBanner : EditorNotificationProvider, DumbAware {
 
     private fun unexcludeFile(project: Project, settings: PluginSettings, vf: VirtualFile) {
         scope.launch {
-            settings.state.removeExcludedBazelWorkspace(vf)
+            settings.state.removeExcludedBazelWorkspace(project, vf)
             EditorNotifications.getInstance(project).updateNotifications(this@BazelWorkspaceBanner)
 
             val module = readAction {
@@ -66,7 +66,7 @@ class BazelWorkspaceBanner : EditorNotificationProvider, DumbAware {
 
     private fun excludeFile(project: Project, settings: PluginSettings, vf: VirtualFile) {
         scope.launch {
-            settings.state.addExcludedBazelWorkspace(vf)
+            settings.state.addExcludedBazelWorkspace(project, vf)
             EditorNotifications.getInstance(project).updateNotifications(this@BazelWorkspaceBanner)
 
             val module = readAction {

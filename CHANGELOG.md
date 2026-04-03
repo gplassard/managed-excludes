@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Fix support in Jetbrains Gateway server mode
+
 ## [0.0.23] - 2026-03-26
 
 - Bump IDEA version range
