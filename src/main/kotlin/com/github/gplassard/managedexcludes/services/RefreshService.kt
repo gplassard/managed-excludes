@@ -34,7 +34,7 @@ class RefreshService(val project: Project, private val cs: CoroutineScope) {
                 MyBundle.message("notification.refreshall.exclude", fromConfig.size),
             )
             excludeService.excludePaths(module, fromConfig)
-            settings.state.updateExcludedPaths(fromConfig)
+            settings.state.updateExcludedPaths(project, fromConfig)
         }
     }
 

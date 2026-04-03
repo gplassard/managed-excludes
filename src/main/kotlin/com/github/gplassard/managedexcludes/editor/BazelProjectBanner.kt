@@ -30,7 +30,7 @@ class BazelProjectBanner : EditorNotificationProvider, DumbAware {
             if (!vf.name.endsWith(Constants.BAZELPROJECT_FILE_EXTENSION)) {
                 return@Function null
             }
-            val tracked = settings.state.isTrackedBazelProject(vf)
+            val tracked = settings.state.isTrackedBazelProject(project, vf)
             val panel = EditorNotificationPanel()
             if (tracked) {
                 panel.text(MyBundle.message("banner.bazelproject.tracked"))
@@ -53,7 +53,7 @@ class BazelProjectBanner : EditorNotificationProvider, DumbAware {
 
     private fun untrackFile(project: Project, settings: PluginSettings, vf: VirtualFile) {
         scope.launch {
-            settings.state.removeTrackedBazelProject(vf)
+            settings.state.removeTrackedBazelProject(project, vf)
             EditorNotifications.getInstance(project).updateNotifications(this@BazelProjectBanner)
 
             val module = readAction {
@@ -66,7 +66,7 @@ class BazelProjectBanner : EditorNotificationProvider, DumbAware {
 
     private fun trackFile(project: Project, settings: PluginSettings, vf: VirtualFile) {
         scope.launch {
-            settings.state.addTrackedBazelProject(vf)
+            settings.state.addTrackedBazelProject(project, vf)
             EditorNotifications.getInstance(project).updateNotifications(this@BazelProjectBanner)
 
             val module = readAction {

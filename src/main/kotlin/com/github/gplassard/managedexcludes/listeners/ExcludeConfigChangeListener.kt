@@ -45,7 +45,7 @@ class ExcludeConfigChangeListener(private val project: Project, private val cs: 
                         excludeService.excludePaths(module, toExclude)
                         excludeService.cancelExcludePaths(module, toCancelExclude)
 
-                        stateService.state.updateExcludedPaths(fromConfig)
+                        stateService.state.updateExcludedPaths(project, fromConfig)
                         EditorNotifications.getInstance(project).updateAllNotifications()
 
                         PluginNotifications.info(
