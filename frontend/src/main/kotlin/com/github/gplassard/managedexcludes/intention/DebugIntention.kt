@@ -2,8 +2,7 @@ package com.github.gplassard.managedexcludes.intention
 
 import com.github.gplassard.managedexcludes.Constants
 import com.github.gplassard.managedexcludes.dialog.DebugDialog
-import com.github.gplassard.managedexcludes.services.config.ConfigService
-import com.github.gplassard.managedexcludes.settings.PluginSettings
+import com.github.gplassard.managedexcludes.rpc.ManagedExcludesApi
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.codeInsight.intention.LowPriorityAction
 import com.intellij.codeInspection.util.IntentionFamilyName
@@ -40,11 +39,11 @@ class DebugIntention : IntentionAction, LowPriorityAction {
         editor: Editor?,
         file: PsiFile?
     ) {
-        val pluginSettings = project.service<PluginSettings>()
-        val configService = project.service<ConfigService>()
+        val api = project.service<ManagedExcludesApi>()
+        val projectPath = project.basePath ?: return
         scope.launch {
-            val excludedFromConfig = configService.loadExcludeConfig(project)
-            val dialog = DebugDialog(project, pluginSettings.state, excludedFromConfig)
+            val debugInfo = api.getDebugInfo(projectPath)
+            val dialog = DebugDialog(project, debugInfo)
             dialog.show()
         }
     }

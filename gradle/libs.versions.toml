@@ -2,6 +2,7 @@
 # libraries
 junit = "4.13.2"
 assertj = "3.27.7"
+kotlinSerialization = "1.7.3"
 
 # plugins
 changelog = "2.5.0"
@@ -9,14 +10,18 @@ intelliJPlatform = "2.13.1"
 kotlin = "2.3.20"
 kover = "0.9.8"
 qodana = "2025.3.2"
+rpc = "2.3.20-0.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+kotlin-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core-jvm", version.ref = "kotlinSerialization" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
 intelliJPlatform = { id = "org.jetbrains.intellij.platform", version.ref = "intelliJPlatform" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
+rpc = { id = "rpc", version.ref = "rpc" }

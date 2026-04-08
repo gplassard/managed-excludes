@@ -1,0 +1,21 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.settings.PluginSettings"/>
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.services.ExcludeService"/>
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.services.RefreshService"/>
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.services.config.ConfigService"/>
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.services.config.ManagedExcludesConfigService"/>
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.services.config.BazelProjectConfigService"/>
+        <projectService serviceImplementation="com.github.gplassard.managedexcludes.services.config.BazelWorkspacesConfigService"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij.platform">
+        <rpc.remoteApiProvider implementation="com.github.gplassard.managedexcludes.rpc.ManagedExcludesApiImpl$Provider"/>
+    </extensions>
+
+    <projectListeners>
+        <listener
+                class="com.github.gplassard.managedexcludes.listeners.ExcludeConfigChangeListener"
+                topic="com.intellij.openapi.vfs.newvfs.BulkFileListener"/>
+    </projectListeners>
+</idea-plugin>

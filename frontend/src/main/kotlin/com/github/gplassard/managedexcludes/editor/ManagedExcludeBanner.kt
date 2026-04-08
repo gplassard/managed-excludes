@@ -2,13 +2,10 @@ package com.github.gplassard.managedexcludes.editor
 
 import com.github.gplassard.managedexcludes.Constants
 import com.github.gplassard.managedexcludes.MyBundle
-import com.github.gplassard.managedexcludes.services.RefreshService
-import com.github.gplassard.managedexcludes.settings.PluginSettings
+import com.github.gplassard.managedexcludes.rpc.ManagedExcludesApi
 import com.intellij.openapi.application.EDT
-import com.intellij.openapi.application.readAction
 import com.intellij.openapi.components.service
 import com.intellij.openapi.fileEditor.FileEditor
-import com.intellij.openapi.module.ModuleUtilCore
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
@@ -25,16 +22,20 @@ class ManagedExcludeBanner : EditorNotificationProvider, DumbAware {
     private val scope = CoroutineScope(Dispatchers.EDT)
 
     override fun collectNotificationData(project: Project, vf: VirtualFile): Function<in FileEditor, out JComponent?> {
-        val settings = project.service<PluginSettings>()
+        val api = project.service<ManagedExcludesApi>()
+        val projectPath = project.basePath ?: return Function { null }
         return Function {
             if (vf.name != Constants.EXCLUDE_FILE_NAME && !vf.name.endsWith(Constants.BAZELPROJECT_FILE_EXTENSION)) {
                 return@Function null
             }
             val panel = EditorNotificationPanel()
-            panel.text(MyBundle.message("banner.exclusions", settings.state.excludedPaths.size))
+            scope.launch {
+                val count = api.getExcludedPathsCount(projectPath)
+                panel.text(MyBundle.message("banner.exclusions", count))
+            }
             panel.createActionLabel(
                 MyBundle.message("banner.exclusions.action.refreshall"),
-                { refreshAll(vf, project) },
+                { refreshAll(vf, project, projectPath, api) },
                 true
             )
             panel
@@ -44,13 +45,11 @@ class ManagedExcludeBanner : EditorNotificationProvider, DumbAware {
     private fun refreshAll(
         vf: VirtualFile,
         project: Project,
+        projectPath: String,
+        api: ManagedExcludesApi,
     ) {
         scope.launch {
-            val refreshService = project.service<RefreshService>()
-            val module = readAction {
-                ModuleUtilCore.findModuleForFile(vf, project)
-            } ?: return@launch
-            refreshService.refreshAll(module)
+            api.refreshAll(projectPath, vf.path)
             EditorNotifications.getInstance(project).updateNotifications(this@ManagedExcludeBanner)
         }
     }
