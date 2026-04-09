@@ -5,4 +5,10 @@
     <vendor>gplassard</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+
+    <content>
+        <module name="managed-excludes.shared" loading="required"/>
+        <module name="managed-excludes.frontend"/>
+        <module name="managed-excludes.backend"/>
+    </content>
 </idea-plugin>

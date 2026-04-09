@@ -7,67 +7,74 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.module.ModuleUtilCore
 import com.intellij.openapi.project.BaseProjectDirectories.Companion.getBaseDirectories
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.vfs.LocalFileSystem
-import com.intellij.openapi.vfs.resolveFromRootOrRelative
+import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.platform.project.ProjectId
+import com.intellij.platform.project.findProjectOrNull
 import com.intellij.platform.rpc.backend.RemoteApiProvider
 import com.intellij.project.isDirectoryBased
+import fleet.rpc.remoteApiDescriptor
 
 class ManagedExcludesApiImpl : ManagedExcludesApi {
 
-    private fun findProject(projectPath: String): Project? =
-        ProjectManager.getInstance().openProjects.find { it.basePath == projectPath }
+    private suspend fun findProject(projectId: ProjectId): Project? =
+        projectId.findProjectOrNull()
 
-    override suspend fun getExcludedPathsCount(projectPath: String): Int {
-        val project = findProject(projectPath) ?: return 0
+    private fun findFile(filePath: String): VirtualFile? =
+        LocalFileSystem.getInstance().findFileByPath(filePath)
+
+    override suspend fun getExcludedPathsCount(projectId: ProjectId): Int {
+        val project = findProject(projectId) ?: return 0
         return project.service<PluginSettings>().state.excludedPaths.size
     }
 
-    override suspend fun isTrackedBazelProject(projectPath: String, relativePath: String): Boolean {
-        val project = findProject(projectPath) ?: return false
-        return project.service<PluginSettings>().state.trackedBazelProjects.contains(relativePath)
+    override suspend fun isTrackedBazelProject(projectId: ProjectId, filePath: String): Boolean {
+        val project = findProject(projectId) ?: return false
+        val vf = findFile(filePath) ?: return false
+        return project.service<PluginSettings>().state.isTrackedBazelProject(project, vf)
     }
 
-    override suspend fun isExcludedBazelWorkspace(projectPath: String, relativePath: String): Boolean {
-        val project = findProject(projectPath) ?: return false
-        return project.service<PluginSettings>().state.excludedBazelWorkspaces.contains(relativePath)
+    override suspend fun isExcludedBazelWorkspace(projectId: ProjectId, filePath: String): Boolean {
+        val project = findProject(projectId) ?: return false
+        val vf = findFile(filePath) ?: return false
+        return project.service<PluginSettings>().state.isExcludedBazelWorkspace(project, vf)
     }
 
-    override suspend fun trackBazelProject(projectPath: String, relativePath: String) {
-        val project = findProject(projectPath) ?: return
-        val vf = resolveRelativePath(project, relativePath) ?: return
+    override suspend fun trackBazelProject(projectId: ProjectId, filePath: String) {
+        val project = findProject(projectId) ?: return
+        val vf = findFile(filePath) ?: return
         project.service<PluginSettings>().state.addTrackedBazelProject(project, vf)
     }
 
-    override suspend fun untrackBazelProject(projectPath: String, relativePath: String) {
-        val project = findProject(projectPath) ?: return
-        val vf = resolveRelativePath(project, relativePath) ?: return
+    override suspend fun untrackBazelProject(projectId: ProjectId, filePath: String) {
+        val project = findProject(projectId) ?: return
+        val vf = findFile(filePath) ?: return
         project.service<PluginSettings>().state.removeTrackedBazelProject(project, vf)
     }
 
-    override suspend fun excludeBazelWorkspace(projectPath: String, relativePath: String) {
-        val project = findProject(projectPath) ?: return
-        val vf = resolveRelativePath(project, relativePath) ?: return
+    override suspend fun excludeBazelWorkspace(projectId: ProjectId, filePath: String) {
+        val project = findProject(projectId) ?: return
+        val vf = findFile(filePath) ?: return
         project.service<PluginSettings>().state.addExcludedBazelWorkspace(project, vf)
     }
 
-    override suspend fun unexcludeBazelWorkspace(projectPath: String, relativePath: String) {
-        val project = findProject(projectPath) ?: return
-        val vf = resolveRelativePath(project, relativePath) ?: return
+    override suspend fun unexcludeBazelWorkspace(projectId: ProjectId, filePath: String) {
+        val project = findProject(projectId) ?: return
+        val vf = findFile(filePath) ?: return
         project.service<PluginSettings>().state.removeExcludedBazelWorkspace(project, vf)
     }
 
-    override suspend fun refreshAll(projectPath: String, virtualFilePath: String) {
-        val project = findProject(projectPath) ?: return
-        val vf = LocalFileSystem.getInstance().findFileByPath(virtualFilePath) ?: return
+    override suspend fun refreshAll(projectId: ProjectId, virtualFilePath: String) {
+        val project = findProject(projectId) ?: return
+        val vf = findFile(virtualFilePath) ?: return
         val module = ModuleUtilCore.findModuleForFile(vf, project) ?: return
         val refreshService = project.service<RefreshService>()
         refreshService.refreshAll(module)
     }
 
-    override suspend fun getDebugInfo(projectPath: String): DebugInfoDto {
-        val project = findProject(projectPath) ?: return DebugInfoDto(
-            projectName = "unknown", projectBasePath = projectPath,
+    override suspend fun getDebugInfo(projectId: ProjectId): DebugInfoDto {
+        val project = findProject(projectId) ?: return DebugInfoDto(
+            projectName = "unknown", projectBasePath = "unknown",
             isDefault = false, isDirectoryBased = false, baseDirectories = emptySet(),
             workspaceFile = null, projectFilePath = null,
             trackedBazelProjects = emptySet(), resolvedTrackedProjects = emptySet(),
@@ -97,15 +104,9 @@ class ManagedExcludesApiImpl : ManagedExcludesApi {
         )
     }
 
-    private fun resolveRelativePath(project: Project, relativePath: String): com.intellij.openapi.vfs.VirtualFile? {
-        return project.getBaseDirectories()
-            .map { it.resolveFromRootOrRelative(relativePath) }
-            .firstOrNull { it != null }
-    }
-
     class Provider : RemoteApiProvider {
         override fun RemoteApiProvider.Sink.remoteApis() {
-            remoteApi(ManagedExcludesApi._generated_RemoteApiDescriptor) {
+            remoteApi(remoteApiDescriptor<ManagedExcludesApi>()) {
                 ManagedExcludesApiImpl()
             }
         }
