@@ -48,13 +48,13 @@ class BazelWorkspaceParserTest {
     fun parseWorkspaceNameMultilineBunchOfOtherStuff() {
         val input = """
         something_else_is_here(True);
-        
+
         workspace(
             something_else = True,
             name = "bazel-playground",
             yet_another_parameter = False
         )
-        
+
         # what is this ?
         """.trimIndent()
 

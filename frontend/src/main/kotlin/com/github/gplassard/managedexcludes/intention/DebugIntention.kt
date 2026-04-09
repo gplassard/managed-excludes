@@ -1,24 +1,22 @@
 package com.github.gplassard.managedexcludes.intention
 
 import com.github.gplassard.managedexcludes.Constants
+import com.github.gplassard.managedexcludes.CoroutineScopeHolder
 import com.github.gplassard.managedexcludes.dialog.DebugDialog
-import com.github.gplassard.managedexcludes.services.config.ConfigService
-import com.github.gplassard.managedexcludes.settings.PluginSettings
+import com.github.gplassard.managedexcludes.rpc.ManagedExcludesApi
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.codeInsight.intention.LowPriorityAction
 import com.intellij.codeInspection.util.IntentionFamilyName
 import com.intellij.codeInspection.util.IntentionName
 import com.intellij.openapi.application.EDT
-import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
+import com.intellij.platform.project.projectId
 import com.intellij.psi.PsiFile
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class DebugIntention : IntentionAction, LowPriorityAction {
-    private val scope = CoroutineScope(Dispatchers.EDT)
     override fun getText(): @IntentionName String {
         return "Debug managed excludes"
     }
@@ -40,11 +38,11 @@ class DebugIntention : IntentionAction, LowPriorityAction {
         editor: Editor?,
         file: PsiFile?
     ) {
-        val pluginSettings = project.service<PluginSettings>()
-        val configService = project.service<ConfigService>()
-        scope.launch {
-            val excludedFromConfig = configService.loadExcludeConfig(project)
-            val dialog = DebugDialog(project, pluginSettings.state, excludedFromConfig)
+        val scope = CoroutineScopeHolder.getInstance(project).getScope()
+        scope.launch(Dispatchers.EDT) {
+            val api = ManagedExcludesApi.getInstance()
+            val debugInfo = api.getDebugInfo(project.projectId())
+            val dialog = DebugDialog(project, debugInfo)
             dialog.show()
         }
     }

@@ -1,19 +1,15 @@
 package com.github.gplassard.managedexcludes.dialog
 
-import com.github.gplassard.managedexcludes.settings.PluginSettingsState
-import com.intellij.openapi.project.BaseProjectDirectories.Companion.getBaseDirectories
+import com.github.gplassard.managedexcludes.rpc.DebugInfoDto
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.project.isDirectoryBased
 import com.intellij.ui.dsl.builder.panel
 import java.awt.Dimension
 import javax.swing.JComponent
 
 class DebugDialog(
     val project: Project,
-    private val state: PluginSettingsState,
-    private val excludedFromConfig: Set<VirtualFile>,
+    private val debugInfo: DebugInfoDto,
 ) : DialogWrapper(project, null, true, IdeModalityType.MODELESS, false) {
     init {
         init()
@@ -21,82 +17,76 @@ class DebugDialog(
     }
 
     override fun createCenterPanel(): JComponent {
-        val trackedProjects = state.trackedBazelProjects
-        val resolvedTrackedProjects = state.resolveTrackedBazelProjects(project)
-        val excludedBazelWorkspaces = state.excludedBazelWorkspaces
-        val resolvedExcludedBazelWorkspaces = state.resolveExcludedBazelWorkspaces(project)
-        val excludedPaths = state.excludedPaths
-        val resolvedExcludedPaths = state.resolveExcludedPaths(project)
         return panel {
             group("Project") {
                 row {
-                    label("name: ${project.name}")
+                    label("name: ${debugInfo.projectName}")
                 }
                 row {
-                    label("isDefault: ${project.isDefault}")
+                    label("isDefault: ${debugInfo.isDefault}")
                 }
                 row {
-                    label("isDirectoryBased: ${project.isDirectoryBased}")
+                    label("isDirectoryBased: ${debugInfo.isDirectoryBased}")
                 }
                 row {
-                    label("basePath: ${project.basePath}")
+                    label("basePath: ${debugInfo.projectBasePath}")
                 }
                 row {
-                    label("baseDirectories: ${project.getBaseDirectories().joinToString(", ") { it.path }}")
+                    label("baseDirectories: ${debugInfo.baseDirectories.joinToString(", ")}")
                 }
                 row {
-                    label("workspaceFile: ${project.workspaceFile?.path}")
+                    label("workspaceFile: ${debugInfo.workspaceFile}")
                 }
                 row {
-                    label("projectFilePath: ${project.projectFile?.path}")
+                    label("projectFilePath: ${debugInfo.projectFilePath}")
                 }
             }
             group("Tracked Projects:") {
-                for (p in trackedProjects) {
+                for (p in debugInfo.trackedBazelProjects) {
                     row {
                         label(p)
                     }
                 }
             }
             group("Resolved Tracked Projects:") {
-                for (p in resolvedTrackedProjects) {
+                for (p in debugInfo.resolvedTrackedProjects) {
                     row {
-                        label("${p.canonicalPath}")
+                        label(p)
                     }
                 }
             }
             group("Excluded Bazel Workspaces:") {
-                for (p in excludedBazelWorkspaces) {
+                for (p in debugInfo.excludedBazelWorkspaces) {
                     row {
                         label(p)
                     }
                 }
             }
             group("Resolved Excluded Bazel Workspaces:") {
-                for (p in resolvedExcludedBazelWorkspaces) {
+                for (p in debugInfo.resolvedExcludedWorkspaces) {
                     row {
-                        label("${p.canonicalPath}")
+                        label(p)
                     }
                 }
             }
             group("Excluded Paths:") {
-                for (p in excludedPaths) {
+                for (p in debugInfo.excludedPaths) {
                     row {
                         label(p)
                     }
                 }
             }
             group("Resolved Excluded Paths:") {
-                for (p in resolvedExcludedPaths) {
+                for (p in debugInfo.resolvedExcludedPaths) {
                     row {
-                        label("${p.canonicalPath}")
+                        label(p)
                     }
                 }
             }
             group("Excluded From Config:") {
-                for (p in excludedFromConfig) {
+                for (p in debugInfo.excludedFromConfig) {
                     row {
-                        label("${p.canonicalPath}")
+                        label(p)
                     }
                 }
             }

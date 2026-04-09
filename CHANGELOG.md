@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Make the plugin modular for better support in Jetbrains Gateway
+
 ## [0.0.24] - 2026-04-03
 
 - Fix support in Jetbrains Gateway server mode

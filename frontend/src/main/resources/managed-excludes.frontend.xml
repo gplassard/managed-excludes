@@ -1,0 +1,19 @@
+<idea-plugin>
+    <dependencies>
+        <module name="intellij.platform.frontend"/>
+        <module name="managed-excludes.shared"/>
+    </dependencies>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.ManagedExcludeBanner"/>
+        <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.BazelProjectBanner"/>
+        <editorNotificationProvider implementation="com.github.gplassard.managedexcludes.editor.BazelWorkspaceBanner"/>
+        <intentionAction>
+            <language>TEXT</language>
+            <className>com.github.gplassard.managedexcludes.intention.DebugIntention</className>
+            <category>Plugin intentions</category>
+        </intentionAction>
+    </extensions>
+</idea-plugin>
