@@ -1,5 +1,6 @@
 package com.github.gplassard.managedexcludes.services
 
+import com.intellij.openapi.application.edtWriteAction
 import com.intellij.openapi.application.writeAction
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -32,7 +33,7 @@ class ExcludeService {
         processor: Consumer<Pair<ContentEntry, VirtualFile>>
     ) {
         val model = ModuleRootManager.getInstance(module).modifiableModel
-        writeAction {
+        edtWriteAction {
             for (entry in model.contentEntries) {
                 for (path in paths) {
                     processor.accept(Pair(entry, path))

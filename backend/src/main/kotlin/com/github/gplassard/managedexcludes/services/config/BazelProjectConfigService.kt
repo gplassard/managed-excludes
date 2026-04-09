@@ -26,8 +26,7 @@ class BazelProjectConfigService {
         }
         return BazelProjectParser.parseExcludedDirectories(content.toString())
             .also { thisLogger().info("Planning to exclude ${it.joinToString()}") }
-            .map { line -> project.getBaseDirectories().map { project -> project.findFileByRelativePath(line)} }
-            .flatten()
+            .flatMap { line -> project.getBaseDirectories().map { project -> project.findFileByRelativePath(line) } }
             .filterNotNull()
             .filter { it.exists() }
             .toList()

@@ -8,7 +8,7 @@ import java.awt.Dimension
 import javax.swing.JComponent
 
 class DebugDialog(
-    val project: Project,
+    project: Project,
     private val debugInfo: DebugInfoDto,
 ) : DialogWrapper(project, null, true, IdeModalityType.MODELESS, false) {
     init {
