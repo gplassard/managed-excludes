@@ -17,7 +17,7 @@ import fleet.rpc.remoteApiDescriptor
 
 class ManagedExcludesApiImpl : ManagedExcludesApi {
 
-    private suspend fun findProject(projectId: ProjectId): Project? =
+    private fun findProject(projectId: ProjectId): Project? =
         projectId.findProjectOrNull()
 
     private fun findFile(filePath: String): VirtualFile? =

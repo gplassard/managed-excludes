@@ -37,8 +37,7 @@ class ManagedExcludesConfigService {
             ?.filter { it.isNotBlank() }
             ?.filter { !it.startsWith(Constants.COMMENT_PREFIX) }
             ?.also { thisLogger().info("Planning to exclude ${it.joinToString()}") }
-            ?.map { line -> excludeFile.parent.findFileByRelativePath(line) }
-            ?.filterNotNull()
+            ?.mapNotNull { line -> excludeFile.parent.findFileByRelativePath(line) }
             ?.filter { it.exists() }
             ?.toList()
             .orEmpty()

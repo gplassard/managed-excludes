@@ -41,7 +41,7 @@ class BazelProjectBanner : EditorNotificationProvider, DumbAware {
                                 val innerApi = ManagedExcludesApi.getInstance()
                                 val pid = project.projectId()
                                 innerApi.untrackBazelProject(pid, filePath)
-                                EditorNotifications.getInstance(project).updateNotifications(this@BazelProjectBanner)
+                                EditorNotifications.getInstance(project).updateAllNotifications()
                                 innerApi.refreshAll(pid, vf.path)
                             }
                         },
@@ -56,7 +56,7 @@ class BazelProjectBanner : EditorNotificationProvider, DumbAware {
                                 val innerApi = ManagedExcludesApi.getInstance()
                                 val pid = project.projectId()
                                 innerApi.trackBazelProject(pid, filePath)
-                                EditorNotifications.getInstance(project).updateNotifications(this@BazelProjectBanner)
+                                EditorNotifications.getInstance(project).updateAllNotifications()
                                 innerApi.refreshAll(pid, vf.path)
                             }
                         },
