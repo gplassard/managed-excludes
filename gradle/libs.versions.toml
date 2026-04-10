@@ -2,7 +2,7 @@
 # libraries
 junit = "4.13.2"
 assertj = "3.27.7"
-kotlinSerialization = "1.7.3"
+kotlinSerialization = "1.11.0"
 
 # plugins
 changelog = "2.5.0"
