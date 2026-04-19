@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Fix RPC service resolution in JetBrains Gateway mode
+
 ## [0.0.25] - 2026-04-09
 
 - Make the plugin modular for better support in Jetbrains Gateway
