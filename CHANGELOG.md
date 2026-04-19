@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.26] - 2026-04-19
+
 - Fix RPC service resolution in JetBrains Gateway mode
 
 ## [0.0.25] - 2026-04-09
@@ -103,7 +105,8 @@ exclude bazel output directories unless you specifically untrack the Workspace f
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.25...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.26...HEAD
+[0.0.26]: https://github.com/gplassard/managed-excludes/compare/v0.0.25...v0.0.26
 [0.0.25]: https://github.com/gplassard/managed-excludes/compare/v0.0.24...v0.0.25
 [0.0.24]: https://github.com/gplassard/managed-excludes/compare/v0.0.23...v0.0.24
 [0.0.23]: https://github.com/gplassard/managed-excludes/compare/v0.0.22...v0.0.23
