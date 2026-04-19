@@ -4,8 +4,6 @@
     <name>managed-excludes</name>
     <vendor>gplassard</vendor>
 
-    <depends>com.intellij.modules.platform</depends>
-
     <content>
         <module name="managed-excludes.shared" loading="required"/>
         <module name="managed-excludes.frontend"/>
