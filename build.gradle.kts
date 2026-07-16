@@ -22,7 +22,7 @@ group = providers.gradleProperty("pluginGroup").get()
 version = providers.gradleProperty("pluginVersion").get()
 
 kotlin {
-    jvmToolchain(25)
+    jvmToolchain(providers.gradleProperty("javaVersion").get().toInt())
 }
 
 subprojects {
