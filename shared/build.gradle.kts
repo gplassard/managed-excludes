@@ -15,12 +15,12 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(providers.gradleProperty("javaVersion").get().toInt())
 }
 
 tasks {
     withType<JavaCompile> {
-        sourceCompatibility = "21"
-        targetCompatibility = "21"
+        sourceCompatibility = providers.gradleProperty("javaVersion").get()
+        targetCompatibility = providers.gradleProperty("javaVersion").get()
     }
 }

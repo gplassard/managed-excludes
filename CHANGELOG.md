@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Bump IDEA version range
+
 ## [0.0.26] - 2026-04-19
 
 - Fix RPC service resolution in JetBrains Gateway mode
