@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Fix bazel exclude path for custom named directories
+
 ## [0.0.27] - 2026-07-16
 
 - Bump IDEA version range
