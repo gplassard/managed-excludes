@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.0.28] - 2026-07-26
+
 - Fix bazel exclude path for custom named directories
 
 ## [0.0.27] - 2026-07-16
@@ -111,7 +113,8 @@ exclude bazel output directories unless you specifically untrack the Workspace f
 - Fix the release process
 - Add a banner on `.managed-excludes` files
 
-[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.27...HEAD
+[Unreleased]: https://github.com/gplassard/managed-excludes/compare/v0.0.28...HEAD
+[0.0.28]: https://github.com/gplassard/managed-excludes/compare/v0.0.27...v0.0.28
 [0.0.27]: https://github.com/gplassard/managed-excludes/compare/v0.0.26...v0.0.27
 [0.0.26]: https://github.com/gplassard/managed-excludes/compare/v0.0.25...v0.0.26
 [0.0.25]: https://github.com/gplassard/managed-excludes/compare/v0.0.24...v0.0.25
