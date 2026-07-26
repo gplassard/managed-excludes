@@ -89,4 +89,29 @@ class BazelWorkspaceParserTest {
         ))
     }
 
+    @Test
+    fun workspaceOutputDirsWithDirectoryName() {
+        val result = BazelWorkspaceParser.workspaceOutputDirs("workspace", "directory")
+
+        assertThat(result).containsExactlyElementsOf(setOf(
+            "bazel-bin",
+            "bazel-out",
+            "bazel-testlogs",
+            "bazel-workspace",
+            "bazel-directory",
+        ))
+    }
+
+    @Test
+    fun workspaceOutputDirsWithoutWorkspaceName() {
+        val result = BazelWorkspaceParser.workspaceOutputDirs(null, "directory")
+
+        assertThat(result).containsExactlyElementsOf(setOf(
+            "bazel-bin",
+            "bazel-out",
+            "bazel-testlogs",
+            "bazel-directory",
+        ))
+    }
+
 }

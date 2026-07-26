@@ -40,7 +40,7 @@ class BazelWorkspacesConfigService {
         val content = readAction { FileDocumentManager.getInstance().getDocument(workspaceFile) }
             ?.immutableCharSequence
         val workspaceName = BazelWorkspaceParser.parseWorkspaceName(content.toString())
-        val outputDirs = BazelWorkspaceParser.workspaceOutputDirs(workspaceName)
+        val outputDirs = BazelWorkspaceParser.workspaceOutputDirs(workspaceName, workspaceFile.parent.name)
 
         return outputDirs
             .mapNotNull { workspaceFile.parent.findChild(it) }

@@ -8,13 +8,12 @@ object BazelWorkspaceParser {
         return matchResult?.groups?.get(1)?.value
     }
 
-    fun workspaceOutputDirs(workspaceName: String?): Set<String> {
+    fun workspaceOutputDirs(workspaceName: String?, directoryName: String? = null): Set<String> {
         val baseExcludes = setOf("bazel-bin", "bazel-out", "bazel-testlogs")
 
-        if (workspaceName == null) {
-            return baseExcludes
-        }
-        return baseExcludes
-            .plus("bazel-${workspaceName.replace("_", "-")}")
+        val derivedExcludes = listOfNotNull(workspaceName, directoryName)
+            .map { "bazel-${it.replace("_", "-")}" }
+
+        return baseExcludes.plus(derivedExcludes)
     }
 }
