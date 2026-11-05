@@ -2,6 +2,7 @@
     <dependencies>
         <module name="intellij.platform.frontend"/>
         <module name="managed-excludes.shared"/>
+        <module name="intellij.platform.rpc"/>
     </dependencies>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
