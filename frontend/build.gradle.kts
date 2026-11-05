@@ -8,6 +8,7 @@ dependencies {
     intellijPlatform {
         intellijIdea(providers.gradleProperty("platformVersion"))
         bundledModule("intellij.platform.frontend")
+        bundledModule("intellij.platform.rpc")
     }
     compileOnly(libs.kotlin.serialization.core)
     implementation(project(":shared"))
