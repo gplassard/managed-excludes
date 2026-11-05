@@ -7,6 +7,7 @@ plugins {
 dependencies {
     intellijPlatform {
         intellijIdea(providers.gradleProperty("platformVersion"))
+        bundledModule("intellij.platform.rpc")
     }
     compileOnly(libs.kotlin.serialization.core)
 
