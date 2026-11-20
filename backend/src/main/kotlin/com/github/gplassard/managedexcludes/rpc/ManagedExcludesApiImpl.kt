@@ -7,13 +7,14 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.module.ModuleUtilCore
 import com.intellij.openapi.project.BaseProjectDirectories.Companion.getBaseDirectories
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.platform.project.ProjectId
 import com.intellij.platform.project.findProjectOrNull
 import com.intellij.platform.rpc.backend.RemoteApiProvider
 import com.intellij.project.isDirectoryBased
 import fleet.rpc.remoteApiDescriptor
+import java.nio.file.Path
 
 class ManagedExcludesApiImpl : ManagedExcludesApi {
 
@@ -21,7 +22,7 @@ class ManagedExcludesApiImpl : ManagedExcludesApi {
         projectId.findProjectOrNull()
 
     private fun findFile(filePath: String): VirtualFile? =
-        LocalFileSystem.getInstance().findFileByPath(filePath)
+        VirtualFileManager.getInstance().findFileByNioPath(Path.of(filePath))
 
     override suspend fun getExcludedPathsCount(projectId: ProjectId): Int {
         val project = findProject(projectId) ?: return 0

@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Migrate file resolution from `LocalFileSystem` to the Eel API (`VirtualFileManager.findFileByNioPath`) so the plugin works with WSL, Docker, and SSH projects
+
 ## [0.0.29] - 2026-11-05
 
 - Bump IDEA version range
