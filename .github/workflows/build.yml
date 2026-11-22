@@ -123,8 +123,10 @@ jobs:
           cache-cleanup: always
 
       # Run tests
+      # xvfb-run provides a virtual display: the ide-starter integration tests (root `test` task)
+      # launch a real IDE with the built plugin; ubuntu-latest runners ship Xvfb preinstalled.
       - name: Run Tests
-        run: ./gradlew check
+        run: xvfb-run -a ./gradlew check
 
       # Collect Tests Result of failed tests
       - name: Collect Tests Result

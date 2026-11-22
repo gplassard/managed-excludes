@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+
 plugins {
     id("rpc")
     alias(libs.plugins.kotlin)
@@ -12,8 +14,12 @@ dependencies {
         bundledModule("intellij.platform.rpc")
         bundledModule("intellij.platform.backend")
         bundledModule("intellij.platform.eel.provider")
+        testFramework(TestFrameworkType.Platform)
     }
     implementation(project(":shared"))
+
+    testImplementation(libs.junit)
+    testImplementation(libs.assertj)
 }
 
 kotlin {
