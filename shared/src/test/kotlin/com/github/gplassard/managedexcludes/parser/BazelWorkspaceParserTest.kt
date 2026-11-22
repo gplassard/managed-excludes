@@ -76,6 +76,22 @@ class BazelWorkspaceParserTest {
         assertThat(result).isNull()
     }
 
+    @Test
+    fun parseWorkspaceNameMissing() {
+        val input = """some_rule(name = "bazel-playground")"""
+
+        val result = BazelWorkspaceParser.parseWorkspaceName(input)
+
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun parseWorkspaceNameEmptyContent() {
+        val result = BazelWorkspaceParser.parseWorkspaceName("")
+
+        assertThat(result).isNull()
+    }
+
 
     @Test
     fun workspaceOutputDirs() {
@@ -112,6 +128,13 @@ class BazelWorkspaceParserTest {
             "bazel-testlogs",
             "bazel-directory",
         ))
+    }
+
+    @Test
+    fun workspaceOutputDirsConvertsUnderscoresToDashes() {
+        val result = BazelWorkspaceParser.workspaceOutputDirs("my_workspace")
+
+        assertThat(result).contains("bazel-my-workspace")
     }
 
 }

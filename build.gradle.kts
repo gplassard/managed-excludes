@@ -1,7 +1,7 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import org.jetbrains.intellij.platform.gradle.Constants.Constraints
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.tasks.BuildPluginTask
 import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitModeTarget
 import java.io.FileWriter
 import javax.xml.stream.XMLOutputFactory
@@ -42,6 +42,7 @@ allprojects {
 dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.assertj)
+    testImplementation(libs.junit.jupiter)
 
     intellijPlatform {
         create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
@@ -53,6 +54,9 @@ dependencies {
         pluginVerifier()
         zipSigner()
         testFramework(TestFrameworkType.Platform)
+        // ide-starter based integration tests: launch a real IDE with the built plugin installed
+        // https://blog.jetbrains.com/platform/2025/02/integration-tests-for-plugin-developers-intro-dependencies-and-first-integration-test/
+        testFramework(TestFrameworkType.Starter)
     }
 }
 
@@ -134,25 +138,17 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
-}
 
-val runIdeForUiTests by intellijPlatformTesting.runIde.registering {
-    task {
-        jvmArgumentProviders += CommandLineArgumentProvider {
-            listOf(
-                "-Drobot-server.port=8082",
-                "-Dide.mac.message.dialogs.as.sheets=false",
-                "-Djb.privacy.policy.text=<!--999.999-->",
-                "-Djb.consents.confirmation.enabled=false",
-            )
-        }
-    }
-
-    plugins {
-        robotServerPlugin(Constraints.LATEST_VERSION)
+    test {
+        // integration tests launch a real IDE with the built plugin installed from this archive
+        dependsOn("buildPlugin")
+        systemProperty(
+            "path.to.build.plugin",
+            named<BuildPluginTask>("buildPlugin").get().archiveFile.get().asFile.absolutePath,
+        )
+        useJUnitPlatform()
     }
 }
-
 
 tasks.register("generateUpdatePlugins") {
     val theGroup = providers.gradleProperty("pluginGroup").get()

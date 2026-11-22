@@ -31,4 +31,39 @@ class BazelProjectParserTest {
         assertThat(result).containsExactlyElementsOf(expectedExcluded)
     }
 
+    @Test
+    fun parseExcludedDirectoriesWithoutDirectoriesSection() {
+        val input = """
+            something_else:
+              -excluded
+        """.trimIndent()
+
+        val result = BazelProjectParser.parseExcludedDirectories(input)
+
+        assertThat(result).isEmpty()
+    }
+
+    @Test
+    fun parseExcludedDirectoriesWithCrlfLineEndings() {
+        val input = "directories:\r\n  -excluded\r\n  included\r\n"
+
+        val result = BazelProjectParser.parseExcludedDirectories(input)
+
+        assertThat(result).containsExactly("excluded")
+    }
+
+    @Test
+    fun parseExcludedDirectoriesStopsAtFirstNonIndentedLine() {
+        val input = """
+            directories:
+              -first
+            other_section:
+              -second
+        """.trimIndent()
+
+        val result = BazelProjectParser.parseExcludedDirectories(input)
+
+        assertThat(result).containsExactly("first")
+    }
+
 }
